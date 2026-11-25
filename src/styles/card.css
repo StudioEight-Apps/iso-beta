@@ -1,0 +1,290 @@
+/* ---------- polyhedron glyph ---------- */
+.die {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  --d: var(--ink);
+  --d-soft: rgba(243, 238, 230, 0.07);
+  --d-num: var(--ink);
+  --d-halo: var(--panel);
+}
+.die--off {
+  --d: var(--off);
+  --d-soft: var(--off-soft);
+}
+.die--def {
+  --d: var(--def);
+  --d-soft: var(--def-soft);
+}
+.die--court {
+  --d: var(--court);
+  --d-soft: var(--court-soft);
+}
+.die__body {
+  fill: var(--d-soft);
+  stroke: var(--d);
+  stroke-width: 5.5;
+  stroke-linejoin: round;
+}
+.die__facets {
+  fill: none;
+  stroke: var(--d);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  opacity: 0.3;
+}
+.die__num {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  fill: var(--d-num);
+  stroke: var(--d-halo);
+  stroke-width: 7;
+  paint-order: stroke;
+  stroke-linejoin: round;
+}
+.die--solid .die__body {
+  fill: var(--d);
+}
+.die--solid .die__facets {
+  stroke: var(--bg);
+  opacity: 0.22;
+}
+.die--solid .die__num {
+  fill: var(--bg);
+  stroke: var(--d);
+}
+
+/* ---------- trading card ---------- */
+.pcard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  container-type: size;
+  --mx: 0.5;
+  --my: 0.5;
+  --holo: 0;
+}
+
+.pcard__in {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: min(6cqw, 16px);
+  border-radius: min(5cqw, 14px);
+  overflow: hidden;
+  background: linear-gradient(158deg, var(--panel-hi) 0%, var(--panel) 52%, var(--bg-raise) 100%);
+  box-shadow: inset 0 0 0 1px var(--edge-hi), inset 0 2px 0 0 rgba(243, 238, 230, 0.07);
+  text-align: left;
+  color: var(--ink);
+}
+
+.pcard--holo .pcard__in {
+  transform: perspective(700px) rotateX(calc((var(--my) - 0.5) * -12deg * var(--holo))) rotateY(calc((var(--mx) - 0.5) * 14deg * var(--holo)));
+  transition: transform 0.2s var(--ease-out);
+}
+
+.cpat {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  stroke: var(--court);
+  fill: none;
+  opacity: 0.2;
+  -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent 78%);
+  mask-image: linear-gradient(to bottom, #000 20%, transparent 78%);
+}
+.cpat__fill {
+  fill: var(--court);
+  stroke: none;
+}
+
+.pcard__num {
+  position: absolute;
+  right: -2cqw;
+  top: -5cqh;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 80%;
+  font-size: 58cqh;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: max(1px, 0.7cqw) rgba(243, 238, 230, 0.17);
+  pointer-events: none;
+}
+
+.pcard__top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2.5cqw;
+}
+
+.pcard__pos {
+  display: grid;
+  place-items: center;
+  width: min(14cqw, 32px);
+  aspect-ratio: 1;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: min(9cqw, 20px);
+  line-height: 1;
+}
+
+.pcard__no {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: min(7.5cqw, 15px);
+  color: var(--ink-2);
+}
+
+.pcard__id {
+  position: relative;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1cqw;
+}
+
+.pcard__first {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: min(6.4cqw, 14px);
+  letter-spacing: 0.16em;
+  color: var(--ink-2);
+  line-height: 1;
+}
+
+.pcard__name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 62%;
+  font-size: min(23cqh, 30cqw, calc(88cqw / (var(--len) * 0.6)));
+  line-height: 0.9;
+  overflow-wrap: anywhere;
+  letter-spacing: 0;
+}
+
+.pcard__dice {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2cqw;
+  margin-top: min(4cqw, 4cqh);
+  padding-top: min(4cqw, 4cqh);
+  border-top: 1px solid var(--edge-hi);
+}
+
+.pcard__die {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(2cqw, 1.6cqh);
+}
+
+.pcard__die .die {
+  width: min(24cqw, 24cqh);
+  --d-halo: var(--panel);
+}
+
+.pcard__die span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(7.5px, 6cqw, 13px);
+  letter-spacing: 0.1em;
+  color: var(--ink-2);
+  line-height: 1;
+}
+
+@container (max-height: 132px) {
+  .pcard__top,
+  .pcard__first {
+    display: none;
+  }
+}
+
+.pcard__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: calc(var(--holo) * 0.9);
+  transition: opacity 0.3s;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(circle at calc(var(--mx) * 100%) calc(var(--my) * 100%), rgba(255, 255, 255, 0.26), transparent 46%),
+    linear-gradient(112deg, transparent 22%, rgba(255, 91, 31, 0.34) 38%, rgba(232, 163, 61, 0.3) 47%, rgba(124, 196, 255, 0.36) 57%, transparent 74%);
+  background-size: 100% 100%, 260% 260%;
+  background-position: 0 0, calc(var(--mx) * 100%) calc(var(--my) * 100%);
+}
+
+/* ---------- face-down ---------- */
+.cback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-sm);
+  background:
+    repeating-linear-gradient(135deg, var(--court-soft) 0 5px, transparent 5px 11px),
+    var(--panel);
+  box-shadow: inset 0 0 0 1px var(--edge-hi);
+}
+.cback span {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--court);
+  background: var(--panel);
+  padding: 3px 5px;
+}
+
+/* ---------- strip ---------- */
+.strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  width: 100%;
+}
+.strip--r {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.strip__id {
+  flex: 1;
+  min-width: 0;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.strip__name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 62%;
+  font-size: min(26px, calc(96cqw / (var(--len) * 0.6)));
+  line-height: 0.92;
+  overflow-wrap: anywhere;
+}
+.strip__meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--ink-3);
+  line-height: 1;
+}
+.strip__dice {
+  display: flex;
+  gap: 3px;
+  flex: none;
+}
+.strip__dice .die {
+  width: 27px;
+}

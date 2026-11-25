@@ -1,0 +1,725 @@
+/* ---------- ISO ball mark ---------- */
+.ball {
+  position: relative;
+  display: inline-block;
+  width: 0.74em;
+  height: 0.74em;
+  flex: none;
+}
+.ball__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--irid, conic-gradient(#ff5b1f, #e8a33d, #ff8a55, #ff5b1f));
+  box-shadow: inset -0.05em -0.07em 0.1em rgba(0, 0, 0, 0.5), inset 0.04em 0.05em 0.08em rgba(255, 255, 255, 0.35);
+  transform-origin: 50% 100%;
+  animation: irid-spin 8s linear infinite;
+}
+.ball__body svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: #050507;
+  stroke-width: 4.5;
+}
+.ball__shadow {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -0.05em;
+  height: 0.08em;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  filter: blur(2px);
+}
+@keyframes dribble {
+  from {
+    transform: translateY(0) scale(1.1, 0.86);
+  }
+  to {
+    transform: translateY(-52%) scale(0.97, 1.03);
+  }
+}
+@keyframes dribble-shadow {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(0.55);
+    opacity: 0.35;
+  }
+}
+.ball--once .ball__body {
+  animation: irid-spin 8s linear infinite, dribble 0.3s cubic-bezier(0.2, 0.6, 0.4, 1) 1.1s 10 alternate;
+}
+.ball--once .ball__shadow {
+  animation: dribble-shadow 0.3s cubic-bezier(0.2, 0.6, 0.4, 1) 1.1s 10 alternate;
+}
+.ball--loop .ball__body {
+  animation: irid-spin 8s linear infinite, dribble 0.32s cubic-bezier(0.2, 0.6, 0.4, 1) infinite alternate;
+}
+.ball--loop .ball__shadow {
+  animation: dribble-shadow 0.32s cubic-bezier(0.2, 0.6, 0.4, 1) infinite alternate;
+}
+.home__letter--ball {
+  overflow: visible;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 0.04em;
+}
+.topbar__mark .ball {
+  width: 15px;
+  height: 15px;
+}
+.lobby__ball {
+  font-size: 44px;
+  margin: 26px auto 6px;
+  display: block;
+}
+
+/* ---------- draft: dealt pool, scrolls ---------- */
+.draft__grid {
+  grid-template-rows: none;
+  grid-auto-rows: auto;
+  align-content: start;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.draft__cell {
+  aspect-ratio: 5 / 6.7;
+}
+@media (min-width: 700px) {
+  .draft__grid {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: none;
+  }
+}
+.pcard__no,
+.pcard__num {
+  display: none;
+}
+
+/* ---------- face-off: arcade VS + roll meters ---------- */
+.rv__vs {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-style: italic;
+  font-size: clamp(22px, 7.5vw, 38px);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-shadow: 0 0 18px var(--off), 3px 3px 0 var(--def);
+}
+.rv__meters {
+  width: 100%;
+  display: grid;
+  gap: 12px;
+}
+.rv__rule {
+  text-align: center;
+  color: var(--ink-3);
+}
+.rv__chance {
+  justify-self: center;
+  padding: 5px 10px 4px;
+  background: var(--panel-hi);
+  box-shadow: inset 0 0 0 1px var(--edge-hi);
+  color: var(--ink);
+}
+.rv__chance b {
+  font-family: var(--font-mono);
+  color: var(--off);
+  margin-left: 6px;
+}
+.meter {
+  display: grid;
+  gap: 5px;
+  --m: var(--off);
+  transition: opacity 0.3s;
+}
+.meter--def {
+  --m: var(--def);
+}
+.meter__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.meter__name {
+  font-size: clamp(17px, 5.2vw, 24px);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.meter__tag {
+  color: var(--m);
+  white-space: nowrap;
+}
+.meter__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.3ch;
+  gap: 10px;
+  align-items: center;
+}
+.meter__track {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  gap: 3px;
+  height: clamp(20px, 6vw, 30px);
+}
+.meter__track i {
+  transform: skewX(-16deg);
+}
+.meter__track i.is-reach {
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+.meter__track i.is-helpzone {
+  background: var(--def-soft);
+  box-shadow: inset 0 0 0 1px var(--def);
+}
+.meter__track i.is-on {
+  background: var(--m);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--m) 70%, transparent);
+}
+.meter__track i.is-help {
+  background: var(--def-hi);
+}
+.meter__num {
+  font-size: clamp(28px, 8.5vw, 44px);
+  font-weight: 800;
+  line-height: 1;
+  text-align: right;
+  color: var(--m);
+}
+.meter__sum {
+  color: var(--def-hi);
+}
+@keyframes meter-win {
+  50% {
+    filter: brightness(2.2);
+  }
+}
+.meter.is-win .meter__track i.is-on {
+  animation: meter-win 0.16s steps(1) 5;
+}
+.meter.is-lose {
+  opacity: 0.4;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ball--once .ball__body,
+  .ball--once .ball__shadow,
+  .ball--loop .ball__body,
+  .ball--loop .ball__shadow,
+  .meter.is-win .meter__track i.is-on {
+    animation: none;
+  }
+}
+
+/* ---------- 3D ball ---------- */
+.ball--3d .ball__gl {
+  position: absolute;
+  inset: -9%;
+  opacity: 0;
+  transform-origin: 50% 88%;
+}
+.ball--3d .ball__gl canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: saturate(1.25) contrast(1.12) drop-shadow(0 0 0.09em rgba(122, 92, 255, 0.55));
+}
+.ball--3d.is-3d .ball__gl {
+  opacity: 1;
+}
+.ball--3d.is-3d .ball__body {
+  opacity: 0;
+}
+.ball--once .ball__gl {
+  animation: dribble 0.3s cubic-bezier(0.2, 0.6, 0.4, 1) 1.1s 10 alternate;
+}
+.ball--loop .ball__gl {
+  animation: dribble 0.32s cubic-bezier(0.2, 0.6, 0.4, 1) infinite alternate;
+}
+@keyframes dribble {
+  from {
+    transform: translateY(0) scale(1.08, 0.9);
+  }
+  to {
+    transform: translateY(-34%) scale(0.98, 1.02);
+  }
+}
+/* flat chip gets the darker chrome too */
+html[data-skin] .ball__body {
+  background:
+    radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.75), transparent 22%),
+    var(--irid);
+}
+
+/* ---------- wordmark font ---------- */
+.home__title,
+.topbar__mark,
+.rv__vs,
+.tip__vs {
+  /* wide, clean caps so the letters sit with the glass ball instead of fighting it */
+  font-family: 'Syncopate', var(--font-display);
+  font-stretch: 100%;
+  font-weight: 700;
+}
+.home__letter:not(.home__letter--ball) > span {
+  background: linear-gradient(180deg, #ffffff 20%, #b9c1dc 78%, #8f98bd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.home__title {
+  font-size: min(25vw, 24dvh, 210px);
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  align-items: flex-end;
+}
+.home__letter--ball {
+  padding-bottom: 0.06em;
+  padding-left: 0.1em;
+}
+.home__letter--ball .ball {
+  width: 0.82em;
+  height: 0.82em;
+}
+.topbar__mark {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+@media (min-width: 900px) {
+  .home__title {
+    font-size: min(calc((min(100vw, 1120px) - 560px) / 3.1), 40dvh);
+  }
+}
+
+/* ---------- draft cells: real card proportions, grid scrolls ---------- */
+.draft .draft__grid {
+  grid-template-rows: none;
+  grid-auto-rows: max-content;
+}
+.draft .draft__cell {
+  aspect-ratio: auto;
+  height: clamp(150px, 43vw, 236px);
+}
+@media (min-width: 700px) {
+  .draft .draft__cell {
+    height: clamp(210px, 25vw, 300px);
+  }
+}
+
+/* ---------- tip-off (VS) screen ---------- */
+.tip {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+}
+.tip__side {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 22px;
+  transition: filter 0.35s;
+}
+.tip__side--me {
+  top: 0;
+  height: 62%;
+  justify-content: flex-start;
+  padding-top: calc(var(--safe-t) + 9dvh);
+  background:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 22px),
+    linear-gradient(160deg, color-mix(in srgb, var(--off) 34%, #000) 0%, color-mix(in srgb, var(--off) 10%, #000) 60%);
+  clip-path: polygon(0 0, 100% 0, 100% 62%, 0 100%);
+}
+.tip__side--opp {
+  bottom: 0;
+  height: 62%;
+  justify-content: flex-end;
+  align-items: flex-end;
+  text-align: right;
+  padding-bottom: calc(var(--safe-b) + 21dvh);
+  background:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 22px),
+    linear-gradient(340deg, color-mix(in srgb, var(--def) 34%, #000) 0%, color-mix(in srgb, var(--def) 10%, #000) 60%);
+  clip-path: polygon(0 38%, 100% 0, 100% 100%, 0 100%);
+}
+.tip__name {
+  font-size: clamp(64px, 27vw, 180px);
+  line-height: 0.86;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-style: italic;
+}
+.tip__side--me .tip__name {
+  color: var(--off);
+  text-shadow: 4px 4px 0 #000;
+}
+.tip__side--opp .tip__name {
+  color: var(--def);
+  text-shadow: -4px 4px 0 #000;
+}
+.tip__tag {
+  color: var(--ink);
+}
+.tip.is-me .tip__side--opp,
+.tip.is-opp .tip__side--me {
+  filter: brightness(0.35) saturate(0.4);
+}
+.tip.is-me .tip__side--me,
+.tip.is-opp .tip__side--opp {
+  filter: brightness(1.25);
+}
+.tip__shake {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.tip__shake > * {
+  grid-area: 1 / 1;
+}
+.tip__vs {
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(64px, 26vw, 170px);
+  line-height: 1;
+  color: #fff;
+  text-shadow: 5px 5px 0 var(--off), -5px -5px 0 var(--def), 0 0 40px rgba(255, 255, 255, 0.5);
+}
+.tip__ball {
+  width: min(44vw, 30dvh, 280px);
+  aspect-ratio: 1;
+}
+.tip__ball .ball {
+  width: 100%;
+  height: 100%;
+}
+.tip__call {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--safe-b) + 4dvh);
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 0 18px;
+  text-align: center;
+}
+.tip__result {
+  margin: 0;
+  font-size: clamp(30px, 10.5vw, 68px);
+  line-height: 0.92;
+  text-wrap: balance;
+  text-shadow: 0 3px 0 #000;
+}
+.tip__note {
+  color: var(--ink-2);
+}
+.tip__wait {
+  color: var(--ink-2);
+}
+
+/* soft dark-iridescent halo and a floor reflection under the 3D ball */
+.ball--3d::before {
+  content: '';
+  position: absolute;
+  inset: -28%;
+  border-radius: 50%;
+  background: var(--irid-deep, radial-gradient(#3a2a12, transparent));
+  filter: blur(26px);
+  opacity: 0.3;
+  animation: irid-spin 10s linear infinite;
+  pointer-events: none;
+}
+.ball--3d .ball__shadow {
+  left: 14%;
+  right: 14%;
+  bottom: -0.09em;
+  height: 0.1em;
+  background: radial-gradient(closest-side, rgba(164, 123, 255, 0.55), rgba(39, 215, 255, 0.18) 60%, transparent);
+  filter: blur(5px);
+}
+
+/* face-off spacing once the meters are in */
+.rv .rv__card {
+  height: clamp(104px, 19dvh, 230px);
+}
+.rv.is-make .rv__rule,
+.rv.is-stop .rv__rule {
+  display: none;
+}
+
+/* court tiles: bars instead of dice glyphs */
+.tile__body {
+  justify-content: center;
+  gap: 9px;
+}
+.tile__stat {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  row-gap: 3px;
+  width: 100%;
+  --pb: var(--off);
+}
+.tile__stat--def {
+  --pb: var(--def);
+}
+.tile__stat em {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-2);
+  text-align: left;
+}
+.tile__stat b {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--pb);
+}
+.tile__stat i {
+  grid-column: 1 / -1;
+  height: 6px;
+  background: linear-gradient(to right, var(--pb) var(--fill), rgba(255, 255, 255, 0.12) var(--fill));
+  -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 calc(100% / 6 - 2px), transparent calc(100% / 6 - 2px) calc(100% / 6));
+  mask-image: repeating-linear-gradient(90deg, #000 0 calc(100% / 6 - 2px), transparent calc(100% / 6 - 2px) calc(100% / 6));
+}
+
+/* ---------- court v2: faces only; stats appear in the panel ---------- */
+.lane {
+  display: none;
+}
+.court__lanes {
+  min-height: 40px;
+  display: grid;
+  place-items: center;
+}
+.pchip {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  --tone: var(--edge-hi);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.pchip--off {
+  --tone: var(--off);
+}
+.pchip--def {
+  --tone: var(--def);
+}
+.pchip__face {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(165deg, var(--panel-hi), var(--bg));
+  box-shadow: inset 0 0 0 1.5px var(--edge-hi);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.pchip__face img {
+  position: absolute;
+  left: 50%;
+  top: 8%;
+  height: calc(235% * var(--zoom, 1));
+  width: auto;
+  max-width: none;
+  transform: translateX(-50%);
+  filter: grayscale(1) contrast(1.1);
+  pointer-events: none;
+}
+.pchip__init {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 26px;
+  color: var(--ink-3);
+}
+.pchip__name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 62%;
+  font-size: clamp(11px, 3.5vw, 16px);
+  line-height: 1;
+}
+.pchip:disabled {
+  opacity: 0.42;
+}
+.pchip.is-live {
+  cursor: pointer;
+}
+.pchip.is-live .pchip__face {
+  box-shadow: inset 0 0 0 2px var(--tone);
+}
+.pchip.is-on {
+  transform: translateY(-5px);
+}
+.pchip.is-on .pchip__face {
+  box-shadow: inset 0 0 0 3px var(--tone), 0 0 22px color-mix(in srgb, var(--tone) 70%, transparent);
+}
+.pchip.is-on .pchip__name {
+  color: var(--tone);
+}
+.pchip.is-spent {
+  opacity: 0.3;
+}
+.pchip__spent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3px 0 2px;
+  background: #000;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* panel: bars and plain odds */
+.pick__guard .pbar,
+.dline .pbar {
+  font-size: 13px;
+}
+.pick__guard {
+  margin-bottom: 10px;
+}
+.shot2 {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  text-align: left;
+  border: 0;
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1.5px var(--edge-hi);
+  color: inherit;
+  cursor: pointer;
+}
+.shot2.is-on {
+  background: var(--off-soft);
+  box-shadow: inset 0 0 0 2.5px var(--off);
+}
+.shot2__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 24px;
+  line-height: 1;
+}
+.shot2__top .t-mono {
+  font-size: 15px;
+  color: var(--off);
+}
+.shot2 .pbar {
+  font-size: 11px;
+  grid-template-columns: minmax(0, 1fr) 2.2ch;
+}
+.shot2 .pbar__label {
+  display: none;
+}
+.shot2__odds {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.shot2__odds b {
+  font-size: 24px;
+  color: var(--ink);
+  margin-right: 4px;
+}
+.shot2__warn {
+  font-size: 11.5px;
+  color: var(--def);
+}
+.dline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0;
+}
+.dline__odds {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-size: 19px;
+  color: var(--ink-3);
+}
+.dline__key {
+  color: var(--ink-3);
+}
+
+.court__row {
+  align-items: start;
+}
+.pchip {
+  align-content: start;
+}
+.pchip__name {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: clamp(10.5px, 3.2vw, 15px);
+}
+
+.pchip {
+  container-type: inline-size;
+}
+.pchip__face[data-ok] .pchip__init {
+  display: none;
+}
+.pchip__name {
+  display: block;
+  white-space: nowrap;
+  overflow: visible;
+  font-size: clamp(8px, calc(100cqw / (var(--len) * 0.52)), 16px);
+}
+
+.rv__big b {
+  font-size: 0.34em;
+  margin-left: 0.25em;
+  color: var(--ink-2);
+}
+html[data-skin] .bug__score {
+  font-size: 34px;
+  min-width: 70px;
+}
+@media (max-height: 720px) {
+}

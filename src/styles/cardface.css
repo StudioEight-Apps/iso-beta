@@ -1,0 +1,64 @@
+/* Shared bits kept from v2: the power bar used by pick panels, and the inspect sheet. The card face itself lives in cardv3.css. */
+.pbar {
+  display: grid;
+  grid-template-columns: 4.2ch minmax(0, 1fr) 2.2ch;
+  align-items: center;
+  gap: 0.7em;
+  font-size: clamp(6.5px, 5.2cqw, 13px);
+  --pb: var(--off);
+}
+.pbar--def {
+  --pb: var(--def);
+}
+.pbar__label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: var(--ink-2);
+}
+.pbar__track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.28em;
+  height: 0.92em;
+}
+.pbar__track i {
+  background: rgba(255, 255, 255, 0.09);
+  transform: skewX(-16deg);
+}
+.pbar__track i.is-on {
+  background: var(--pb);
+  box-shadow: 0 0 0.5em color-mix(in srgb, var(--pb) 65%, transparent);
+}
+.pbar__val {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.15em;
+  line-height: 1;
+  text-align: right;
+  color: var(--pb);
+}
+
+/* ----- inspect sheet: one card, tap to flip ----- */
+.inspect {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 12px;
+}
+.inspect__card {
+  width: min(64vw, 34dvh, 280px);
+  max-height: none;
+}
+.inspect__hint {
+  margin-top: 0;
+}
+
+.c3d {
+  user-select: none;
+  -webkit-user-select: none;
+}
+.inspect__hint {
+  color: var(--ink-2);
+}

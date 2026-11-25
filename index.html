@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050509" />
+    <meta name="description" content="Build a squad. Roll the dice. A two-player basketball card game." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ISO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ISO" />
+    <meta property="og:title" content="ISO · Build a squad. Roll the dice." />
+    <meta property="og:description" content="A two-player basketball card game. Tap to play." />
+    <meta property="og:url" content="https://iso-beta-zeta.vercel.app/" />
+    <meta property="og:image" content="https://iso-beta-zeta.vercel.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://iso-beta-zeta.vercel.app/og.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <style>
+      html { background: #050509; }
+      #splash { position: fixed; inset: 0; z-index: 999; display: grid; place-content: center; justify-items: center; gap: 34px; background: radial-gradient(70% 50% at 50% 108%, rgba(164, 123, 255, 0.28), transparent 70%), radial-gradient(60% 40% at 50% -8%, rgba(39, 215, 255, 0.16), transparent 70%), #050509; transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.32, 0.72, 0, 1); }
+      #splash.is-out { opacity: 0; transform: scale(1.06); pointer-events: none; }
+      .sp__ball { position: relative; width: 104px; height: 104px; }
+      .sp__b { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.95) 0 1.5%, rgba(255, 255, 255, 0.25) 5%, transparent 12%), radial-gradient(circle at 46% 44%, #04050d 0 24%, rgba(4, 5, 13, 0.72) 42%, transparent 66%), radial-gradient(circle at 50% 50%, transparent 58%, rgba(0, 0, 0, 0.7) 72%), conic-gradient(from 200deg, #0aa6ff, #2a22c8, #a316ff, #ff2bb0, #5a12a8, #04c8c0, #0aa6ff); box-shadow: 0 0 24px rgba(122, 92, 255, 0.55), 0 0 54px rgba(39, 215, 255, 0.18); transform-origin: 50% 100%; animation: sp-bounce 0.42s cubic-bezier(0.3, 0, 0.7, 1) infinite alternate; }
+      .sp__b svg { width: 100%; height: 100%; fill: none; stroke: #03030a; stroke-width: 1.6; }
+      .sp__sh { position: absolute; left: 14%; right: 14%; bottom: -16px; height: 10px; border-radius: 50%; background: rgba(0, 0, 0, 0.9); filter: blur(5px); animation: sp-sh 0.42s cubic-bezier(0.3, 0, 0.7, 1) infinite alternate; }
+      .sp__bar { display: flex; gap: 5px; }
+      .sp__bar i { width: 16px; height: 9px; border-radius: 2px; background: rgba(255, 255, 255, 0.1); animation: sp-seg 1.2s steps(1) infinite; }
+      .sp__bar i:nth-child(1) { animation-delay: 0s; } .sp__bar i:nth-child(2) { animation-delay: 0.12s; } .sp__bar i:nth-child(3) { animation-delay: 0.24s; } .sp__bar i:nth-child(4) { animation-delay: 0.36s; } .sp__bar i:nth-child(5) { animation-delay: 0.48s; } .sp__bar i:nth-child(6) { animation-delay: 0.6s; } .sp__bar i:nth-child(7) { animation-delay: 0.72s; } .sp__bar i:nth-child(8) { animation-delay: 0.84s; }
+      .sp__txt { margin-top: -18px; font: 700 11px/1 -apple-system, system-ui, sans-serif; letter-spacing: 0.34em; text-indent: 0.34em; color: rgba(255, 255, 255, 0.55); animation: sp-blink 1s steps(1) infinite; }
+      @keyframes sp-bounce { from { transform: translateY(-46px) scale(1, 1); } 85% { transform: translateY(0) scale(1, 1); } to { transform: translateY(0) scale(1.1, 0.86); } }
+      @keyframes sp-sh { from { transform: scale(0.55); opacity: 0.35; } to { transform: scale(1.1); opacity: 0.9; } }
+      @keyframes sp-seg { 0% { background: linear-gradient(90deg, #a47bff, #27d7ff); box-shadow: 0 0 10px rgba(122, 92, 255, 0.8); } 70% { background: rgba(255, 255, 255, 0.1); box-shadow: none; } }
+      @keyframes sp-blink { 50% { opacity: 0.15; } }
+      @media (prefers-reduced-motion: reduce) { .sp__b, .sp__sh, .sp__txt { animation: none; } }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Syncopate:wght@700&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>ISO · Build a squad. Roll the dice.</title>
+  </head>
+  <body>
+    <div id="splash" aria-hidden="true">
+      <div class="sp__ball">
+        <span class="sp__sh"></span>
+        <span class="sp__b"><svg viewBox="0 0 100 100"><path d="M50 0 V100 M0 50 H100 M16 12 Q52 50 16 88 M84 12 Q48 50 84 88" /></svg></span>
+      </div>
+      <div class="sp__bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="sp__txt">LOADING</div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

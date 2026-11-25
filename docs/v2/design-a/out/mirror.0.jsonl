@@ -1,0 +1,4 @@
+{"exp":"mirror","calls":"plain","n":20000,"seat0WinPct":49.73,"otPct":2.38,"tiebreakPct":0}
+{"exp":"mirror","calls":"star","n":20000,"seat0WinPct":49.52,"otPct":2.34,"tiebreakPct":0}
+{"exp":"mirror","calls":"fly","n":20000,"seat0WinPct":50.31,"otPct":2.31,"tiebreakPct":0}
+{"exp":"mirror","calls":"rim","n":20000,"seat0WinPct":49.95,"otPct":2.4,"tiebreakPct":0}

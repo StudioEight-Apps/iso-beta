@@ -1,0 +1,194 @@
+/* ---------- 3D card: depth, flip, glare, foil ---------- */
+.c3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  container-type: size;
+  perspective: 900px;
+  --c3d-t: clamp(4px, 3.2cqw, 9px);
+  --c3d-r: min(5cqw, 14px);
+  --c3d-edge: #2c2c36;
+  --c3d-ring: var(--edge-hi);
+  -webkit-tap-highlight-color: transparent;
+}
+.c3d--off {
+  --c3d-edge: color-mix(in srgb, var(--off) 62%, #000);
+  --c3d-ring: var(--off);
+}
+.c3d--def {
+  --c3d-edge: color-mix(in srgb, var(--def) 62%, #000);
+  --c3d-ring: var(--def);
+}
+.c3d--elite {
+  --c3d-edge: #3b3f78;
+  --c3d-ring: transparent;
+}
+.c3d.is-interactive {
+  touch-action: none;
+  cursor: grab;
+}
+.c3d.is-interactive:active {
+  cursor: grabbing;
+}
+
+.c3d__pose,
+.c3d__body {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.c3d__face,
+.c3d__slab {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--c3d-r);
+}
+.c3d__slab {
+  background: var(--c3d-edge);
+}
+.c3d__face {
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.c3d__front {
+  transform: translateZ(calc(var(--c3d-t) / 2));
+}
+.c3d__back {
+  transform: rotateY(180deg) translateZ(calc(var(--c3d-t) / 2));
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, 0.07), transparent 62%),
+    linear-gradient(180deg, #0b0b10, #050507 60%, #020203);
+  box-shadow: inset 0 0 0 max(1.5px, 1cqw) rgba(255, 255, 255, 0.16);
+}
+.c3d__backart {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.c3d__backring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56cqw;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 max(1px, 0.5cqw) rgba(255, 255, 255, 0.18), 0 0 0 max(1px, 0.5cqw) rgba(255, 255, 255, 0.05);
+}
+.c3d.is-elite .c3d__backring {
+  box-shadow: none;
+  padding: max(1.5px, 0.9cqw);
+  background: var(--irid, conic-gradient(#4fb6c9, #5a5fc7, #9a4fb0, #3f8f86, #4fb6c9));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.c3d__backmark {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: 22cqw;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #f5f7fa;
+}
+
+.c3d__frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 max(2px, 1.5cqw) var(--c3d-ring);
+  pointer-events: none;
+}
+
+.c3d__glare,
+.c3d__foil,
+.c3d__dim,
+.c3d__sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.c3d__glare {
+  mix-blend-mode: soft-light;
+}
+/* Dark oil-slick foil, elite cards only. */
+.c3d__foil {
+  mix-blend-mode: color-dodge;
+  background-image: repeating-linear-gradient(
+    112deg,
+    rgba(25, 211, 255, 0) 0%,
+    rgba(79, 182, 201, 0.5) 7%,
+    rgba(90, 95, 199, 0.5) 14%,
+    rgba(154, 79, 176, 0.45) 21%,
+    rgba(63, 143, 134, 0.45) 28%,
+    rgba(25, 211, 255, 0) 36%
+  );
+  background-size: 320% 320%;
+  -webkit-mask-image: repeating-linear-gradient(-38deg, #000 0 1.5px, rgba(0, 0, 0, 0.25) 1.5px 5px);
+  mask-image: repeating-linear-gradient(-38deg, #000 0 1.5px, rgba(0, 0, 0, 0.25) 1.5px 5px);
+}
+.c3d__dim {
+  background: #020203;
+}
+.c3d__sweep {
+  width: 60%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5) 45%, rgba(205, 184, 255, 0.45) 55%, transparent);
+  mix-blend-mode: screen;
+}
+
+.c3d__shadow {
+  position: absolute;
+  inset: 10% 4% -7% 4%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.7), transparent);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* ---------- draft pick reveal ---------- */
+.dpick {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 40px;
+  padding: 24px;
+  background: var(--scrim);
+  text-align: center;
+}
+.dpick__who {
+  color: var(--court);
+}
+.dpick__who.is-me {
+  color: var(--off);
+}
+.dpick__card {
+  width: min(62vw, 38dvh, 300px);
+  aspect-ratio: 5 / 7;
+}
+.dpick__name {
+  font-size: clamp(34px, 11vw, 64px);
+  line-height: 0.9;
+}
+.dpick__arch {
+  color: var(--ink-2);
+}
+
+.inspect__hint {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--ink-3);
+  margin-top: -4px;
+}
+.inspect__actions {
+  display: grid;
+  gap: 8px;
+}

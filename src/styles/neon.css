@@ -1,0 +1,186 @@
+/* Sleek black + neon skins. Applied when <html data-skin="volt|pulse|uv">. Remove the attribute for the hardwood skin. */
+@property --irid-a {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+
+html[data-skin] {
+  --bg: #050507;
+  --bg-raise: #0a0a0e;
+  --panel: #0e0e13;
+  --panel-hi: #17171f;
+  --edge: rgba(255, 255, 255, 0.08);
+  --edge-hi: rgba(255, 255, 255, 0.2);
+  --scrim: rgba(2, 2, 4, 0.88);
+  --ink: #f5f7fa;
+  --ink-2: rgba(245, 247, 250, 0.66);
+  --ink-3: rgba(245, 247, 250, 0.4);
+  /* neutral chrome for lines and labels; iridescence is reserved for elite cards */
+  --court: #e6e9f0;
+  --court-soft: rgba(230, 233, 240, 0.1);
+  --court-faint: rgba(230, 233, 240, 0.05);
+  /* oil-slick: muted edge colours, and a much darker set for glows */
+  --irid: conic-gradient(from var(--irid-a), #4fb6c9, #5a5fc7, #9a4fb0, #3f8f86, #4fb6c9);
+  --irid-deep: conic-gradient(from var(--irid-a), #0b3a47, #1d1b57, #4a1650, #0d3a33, #0b3a47);
+}
+html[data-skin='aura'] {
+  --off: #a47bff;
+  --off-hi: #cdb8ff;
+  --off-soft: rgba(164, 123, 255, 0.17);
+  --off-ink: #0d0524;
+  --def: #27d7ff;
+  --def-hi: #9cecff;
+  --def-soft: rgba(39, 215, 255, 0.14);
+  --def-ink: #00141a;
+}
+html[data-skin='pulse'] {
+  --off: #ff2d87;
+  --off-hi: #ff7fb5;
+  --off-soft: rgba(255, 45, 135, 0.16);
+  --off-ink: #1a0010;
+  --def: #25e6ff;
+  --def-hi: #9af3ff;
+  --def-soft: rgba(37, 230, 255, 0.14);
+  --def-ink: #00161a;
+}
+html[data-skin='uv'] {
+  --off: #9d6bff;
+  --off-hi: #c3a6ff;
+  --off-soft: rgba(157, 107, 255, 0.18);
+  --off-ink: #0c0420;
+  --def: #2effb0;
+  --def-hi: #9dffd9;
+  --def-soft: rgba(46, 255, 176, 0.13);
+  --def-ink: #001a10;
+}
+
+/* black stage: one soft top light and a hairline grid, no wood */
+html[data-skin] body::before {
+  background:
+    radial-gradient(90% 46% at 50% -10%, var(--off-soft), transparent 70%),
+    radial-gradient(70% 40% at 50% 112%, var(--def-soft), transparent 70%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 64px);
+}
+html[data-skin] .cpat {
+  opacity: 0.1;
+}
+
+@keyframes irid-spin {
+  to {
+    --irid-a: 360deg;
+  }
+}
+
+/* ---------- player photo ---------- */
+.pcard__shot {
+  position: absolute;
+  inset: 0 0 30% 0;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000 62%, transparent 98%);
+}
+.pcard__shot img {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  height: calc(100% * var(--zoom, 1));
+  width: auto;
+  max-width: none;
+  transform: translateX(-50%);
+  filter: grayscale(1) contrast(1.12) brightness(0.96) drop-shadow(0 0 1px rgba(255, 255, 255, 0.55));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.pcard--photo .pcard__num {
+  opacity: 0.55;
+}
+.pcard--photo .pcard__id {
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
+
+/* ---------- elite: dark iridescent aura ---------- */
+.pcard__aura {
+  position: absolute;
+  left: 50%;
+  top: 32%;
+  width: 104%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--irid-deep, conic-gradient(#3a2a12, #4a1c0c, #17304a, #3a2a12));
+  filter: blur(min(12cqw, 30px));
+  opacity: 0.95;
+  animation: irid-spin 9s linear infinite;
+  pointer-events: none;
+}
+html[data-skin] .pcard__tier--elite {
+  background: #050507;
+  color: #cfd6e6;
+  box-shadow: inset 0 0 0 1px #7f88c9;
+}
+html[data-skin] .pcard--elite .pcard__arch {
+  color: #cfd6e6;
+}
+
+/* small cards in grids: elite gets an iridescent hairline */
+html[data-skin] .pcard--elite .pcard__in {
+  box-shadow: none;
+}
+html[data-skin] .pcard--elite .pcard__in::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: max(1.5px, 0.9cqw);
+  background: var(--irid);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: irid-spin 6s linear infinite;
+  pointer-events: none;
+}
+
+/* 3D card: elite edge + outer aura */
+html[data-skin] .c3d--elite {
+  --c3d-edge: #3b3f78;
+  --c3d-ring: transparent;
+}
+html[data-skin] .c3d--star {
+  --c3d-edge: #3a3a46;
+}
+html[data-skin] .c3d--off {
+  --c3d-edge: color-mix(in srgb, var(--off) 62%, #000);
+}
+html[data-skin] .c3d--def {
+  --c3d-edge: color-mix(in srgb, var(--def) 62%, #000);
+}
+html[data-skin] .c3d.is-elite .c3d__shadow {
+  inset: -9%;
+  border-radius: 18%;
+  background: var(--irid-deep);
+  filter: blur(24px);
+  opacity: 0.9;
+  animation: irid-spin 7s linear infinite;
+}
+html[data-skin] .c3d__foil {
+  background-image: repeating-linear-gradient(
+    112deg,
+    rgba(25, 211, 255, 0) 0%,
+    rgba(79, 182, 201, 0.5) 7%,
+    rgba(90, 95, 199, 0.5) 14%,
+    rgba(154, 79, 176, 0.45) 21%,
+    rgba(63, 143, 134, 0.45) 28%,
+    rgba(25, 211, 255, 0) 36%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard__aura,
+  html[data-skin] .pcard--elite .pcard__in::after,
+  html[data-skin] .c3d.is-elite .c3d__shadow {
+    animation: none;
+  }
+}

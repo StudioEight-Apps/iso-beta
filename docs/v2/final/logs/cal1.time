@@ -1,0 +1,1 @@
+node calibrate.ts 1500 7 > cal1.log 2>&1  137.57s user 1.71s system 87% cpu 2:38.97 total

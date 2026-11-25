@@ -1,0 +1,503 @@
+/* iOS pass: system type for UI, liquid-glass surfaces, continuous radii, 44pt+ targets. Loaded last. */
+html[data-skin] {
+  --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --glass-bg: rgba(26, 26, 38, 0.5);
+  --glass-bg-thick: rgba(15, 15, 22, 0.76);
+  --glass-edge: inset 0 0 0 1px rgba(255, 255, 255, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --glass-blur: blur(24px) saturate(180%);
+  --r-card: 22px;
+  --r-ctl: 16px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 28px;
+}
+html[data-skin] body {
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+/* coloured light behind everything, so the glass has something to blur */
+html[data-skin] body::after {
+  width: min(130vw, 760px);
+  border: 0;
+  box-shadow: none;
+  background: var(--irid-deep);
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: irid-spin 16s linear infinite;
+}
+
+/* one glass recipe */
+html[data-skin] :is(.topbar, .bug, .turn, .rail, .hint, .wait, .shot2, .pick__lock, .home__panel, .ticker, .btn--ghost, .lobby__body, .rv__chance) {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-edge), var(--glass-shadow);
+  border: 0;
+}
+
+/* top bar: floating capsule */
+html[data-skin] .topbar {
+  height: 48px;
+  margin: 2px 0 10px;
+  padding: 0 4px 0 14px;
+  border-radius: 999px;
+}
+html[data-skin] .iconbtn {
+  border-radius: 50%;
+}
+html[data-skin] .t-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+/* scorebug */
+html[data-skin] .bug {
+  height: 66px;
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+html[data-skin] .bug__score {
+  background: transparent;
+  color: var(--ink);
+  min-width: 58px;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.08), inset -1px 0 0 rgba(255, 255, 255, 0.08);
+  transition: color 0.4s, text-shadow 0.4s;
+}
+html[data-skin] .bug__score.is-bump {
+  background: transparent;
+  color: var(--off-hi);
+  text-shadow: 0 0 22px var(--off);
+}
+html[data-skin] .bug__dots i {
+  border-radius: 2px;
+}
+
+/* buttons: iOS filled / glass, sentence case */
+html[data-skin] .btn {
+  clip-path: none;
+  border-radius: var(--r-ctl);
+  min-height: 54px;
+  font-family: var(--font-ui);
+  font-weight: 650;
+  font-stretch: 100%;
+  font-size: 17px;
+  letter-spacing: -0.015em;
+  text-transform: none;
+}
+html[data-skin] :is(.btn--off, .btn--def, .btn--court, .btn--ink) {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 -1px 0 rgba(0, 0, 0, 0.18), 0 10px 26px color-mix(in srgb, currentColor 0%, rgba(0, 0, 0, 0.5));
+}
+html[data-skin] .btn--off {
+  background: linear-gradient(180deg, var(--off-hi), var(--off));
+}
+html[data-skin] .btn--def {
+  background: linear-gradient(180deg, var(--def-hi), var(--def));
+}
+html[data-skin] .btn--court {
+  background: linear-gradient(180deg, #ffffff, #dfe3ee);
+  color: #08080c;
+}
+html[data-skin] .btn--quiet {
+  font-size: 15px;
+  letter-spacing: 0;
+}
+html[data-skin] .dock .btn--long {
+  font-size: 15px;
+}
+
+/* role banner: tinted glass capsule */
+html[data-skin] .role {
+  clip-path: none;
+  height: 48px;
+  padding: 0 14px;
+  border-radius: var(--r-ctl);
+  background: color-mix(in srgb, var(--role) 22%, rgba(20, 20, 30, 0.6));
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--role) 55%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: var(--ink);
+}
+html[data-skin] .role__icon {
+  color: var(--role);
+}
+html[data-skin] .role__txt {
+  font-size: clamp(20px, 5.8vw, 24px);
+}
+html[data-skin] .role__opp {
+  padding-right: 0;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* dock panels */
+html[data-skin] .hint {
+  border-radius: var(--r-card);
+  padding: 18px;
+}
+html[data-skin] .hint b {
+  font-size: clamp(24px, 7.4vw, 32px);
+}
+html[data-skin] .hint p {
+  font-size: 15px;
+  line-height: 1.35;
+}
+html[data-skin] .wait {
+  border-radius: var(--r-card);
+}
+html[data-skin] .shot2 {
+  border-radius: 18px;
+  padding: 14px;
+}
+html[data-skin] .shot2.is-on {
+  background: color-mix(in srgb, var(--off) 20%, rgba(20, 20, 30, 0.6));
+  box-shadow: inset 0 0 0 2px var(--off), inset 0 1px 0 rgba(255, 255, 255, 0.2), var(--glass-shadow);
+}
+html[data-skin] .pick__lock {
+  border-radius: 18px;
+  padding: 6px 16px 12px;
+}
+html[data-skin] .pick__ctx {
+  font-size: 14px;
+  line-height: 20px;
+}
+html[data-skin] .ticker {
+  border-radius: 999px;
+}
+html[data-skin] .rv__chance {
+  border-radius: 999px;
+}
+
+/* draft */
+html[data-skin] .turn {
+  border-radius: 18px;
+  overflow: hidden;
+}
+html[data-skin] .rail {
+  border-radius: 18px;
+  padding: 8px 10px;
+}
+html[data-skin] :is(.rail__slot, .chip) {
+  border-radius: 11px;
+}
+html[data-skin] .draft__cell {
+  border: 0;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+}
+html[data-skin] .draft__card {
+  inset: 0;
+  border-radius: 18px;
+}
+html[data-skin] .draft__card .pcard__in {
+  border-radius: 18px;
+}
+html[data-skin] .draft__grid {
+  gap: 8px;
+}
+
+/* court chips */
+html[data-skin] .pchip__face {
+  border-radius: 20px;
+}
+
+/* sheets: thick glass, large top radius, no fake grabber */
+html[data-skin] .sheet__scrim {
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+html[data-skin] .sheet__panel {
+  background: var(--glass-bg-thick);
+  -webkit-backdrop-filter: blur(34px) saturate(180%);
+  backdrop-filter: blur(34px) saturate(180%);
+  border: 0;
+  border-radius: 30px 30px 0 0;
+  padding: 20px 20px calc(var(--safe-b) + 20px);
+  box-shadow: var(--glass-edge), 0 -24px 70px rgba(0, 0, 0, 0.55);
+}
+@media (min-width: 720px) {
+  html[data-skin] .sheet__panel {
+    border: 0;
+    border-radius: 30px;
+  }
+}
+
+/* home + forms */
+html[data-skin] .home__panel {
+  border-radius: 26px;
+  padding: 18px;
+}
+html[data-skin] .field__in {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+html[data-skin] .home__rule,
+html[data-skin] .home__dice {
+  display: none;
+}
+html[data-skin] .lobby__body {
+  border-radius: 26px;
+  padding: 22px 18px;
+}
+
+/* press feedback everywhere */
+html[data-skin] :is(.pchip.is-live, .shot2, .draft__card, .iconbtn):active {
+  transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-skin] body::after {
+    animation: none;
+  }
+}
+
+/* court: keep the two rows close, centred in the space */
+html[data-skin] .court__floor {
+  justify-content: center;
+  gap: 6px;
+}
+html[data-skin] .court__lanes {
+  flex: 0 0 auto;
+  min-height: 46px;
+}
+html[data-skin] .court__row {
+  flex: 0 0 auto;
+}
+html[data-skin] .home__letter--ball .ball {
+  aspect-ratio: 1;
+  height: auto;
+  align-self: flex-end;
+}
+
+/* short phones: smaller faces and tighter panels so nothing overlaps */
+@media (max-height: 720px) {
+  html[data-skin] .court__tag {
+    display: none;
+  }
+  html[data-skin] .pchip__face {
+    width: min(100%, 44px);
+    border-radius: 13px;
+  }
+  html[data-skin] .pchip {
+    gap: 4px;
+  }
+  html[data-skin] .court__lanes {
+    min-height: 12px;
+  }
+  html[data-skin] .court__lanes .ticker {
+    display: none;
+  }
+  html[data-skin] .topbar {
+    height: 44px;
+    margin-bottom: 6px;
+  }
+  html[data-skin] .bug {
+    height: 56px;
+  }
+  html[data-skin] .bug__score {
+    font-size: 38px;
+  }
+  html[data-skin] .role {
+    height: 42px;
+  }
+  html[data-skin] .shot2 {
+    padding: 10px 12px;
+    gap: 5px;
+  }
+  html[data-skin] .shot2__odds b {
+    font-size: 20px;
+  }
+  html[data-skin] .btn {
+    min-height: 50px;
+  }
+  html[data-skin] .pick__guard {
+    margin-bottom: 4px;
+  }
+}
+
+/* five-position slots */
+html[data-skin] .rail__slot {
+  position: relative;
+  min-height: 46px;
+  padding-top: 13px;
+}
+.rail__pos {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.rail__slot.is-off {
+  box-shadow: inset 0 0 0 1.5px #ffb347;
+}
+.rail__slot.is-off .rail__pos {
+  color: #ffb347;
+}
+.pcard__pos {
+  width: auto;
+  min-width: min(14cqw, 32px);
+  padding: 0 0.3em;
+  font-size: min(7.4cqw, 16px);
+  border-radius: 6px;
+}
+.pchip__pos {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  padding: 2px 5px 1px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.mrow__n {
+  font-size: 18px;
+}
+
+/* ---------- chemistry + abilities ---------- */
+.pcard__abil {
+  align-self: flex-start;
+  margin-top: 1.4cqw;
+  padding: 0.25em 0.6em 0.2em;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: inset 0 0 0 1px #8f98d8;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: clamp(6.5px, 4.8cqw, 12px);
+  letter-spacing: 0.02em;
+  color: #dfe4ff;
+  line-height: 1;
+}
+@container (max-height: 210px) {
+  .pcard__abil {
+    display: none;
+  }
+}
+.cstat__abil {
+  display: grid;
+  gap: 1.5cqw;
+  padding: 4cqw;
+  border-radius: 4cqw;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px #8f98d8;
+  font-size: 4.3cqw;
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+.cstat__abil-n {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 6cqw;
+  color: var(--ink);
+}
+.rail__chem {
+  margin-left: auto;
+  margin-right: 10px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.rail__chem b {
+  color: var(--ink);
+  font-family: var(--font-mono);
+}
+.chemline {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.chemline b {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--ink);
+}
+.chemline.is-up b {
+  color: #5dffa8;
+}
+.chemline.is-down b {
+  color: #ff7a8a;
+}
+.chemrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.chemrow__n,
+.chemrow__l {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.chemrow__n b {
+  color: var(--ink);
+  font-family: var(--font-mono);
+}
+.chemrow__l.is-bad {
+  color: #ff9aa6;
+}
+.call {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-ui);
+}
+.call b {
+  font-weight: 700;
+  font-size: 17px;
+}
+.call em {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.call.is-cash b {
+  color: #5dffa8;
+}
+.call.is-miss b {
+  color: #ff7a8a;
+}
+.shot2__warn .call b {
+  font-size: 12.5px;
+}
+.shot2__warn {
+  color: var(--ink-2);
+}
+.dline__odds .call b {
+  font-size: 14px;
+}
+.dline__odds .call em {
+  display: none;
+}

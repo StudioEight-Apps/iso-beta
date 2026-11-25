@@ -1,0 +1,7 @@
+{"exp":"tournament","a":"bigNames/sharp","b":"hints/sharp","n":6000,"winPct":35.33,"margin":-6.61,"avgScore":107.2,"otPct":2.08,"tiebreakPct":0,"firstDrafterWinPct":50.8,"chemA":2.06,"chemB":8.65}
+{"exp":"tournament","a":"ratings/sharp","b":"bullies/sharp","n":6000,"winPct":62.97,"margin":6.09,"avgScore":109.7,"otPct":2,"tiebreakPct":0,"firstDrafterWinPct":50.52,"chemA":2.65,"chemB":-0.37}
+{"exp":"tournament","a":"chemistry/sharp","b":"shooters/sharp","n":6000,"winPct":71.38,"margin":10.68,"avgScore":111.8,"otPct":2.02,"tiebreakPct":0,"firstDrafterWinPct":49.57,"chemA":11.76,"chemB":1.38}
+{"exp":"tournament","a":"chemistry/sharp","b":"counter/sharp","n":6000,"winPct":46.4,"margin":-1.42,"avgScore":108.8,"otPct":2.08,"tiebreakPct":0,"firstDrafterWinPct":51.63,"chemA":11.96,"chemB":9.01}
+{"exp":"tournament","a":"shooters/sharp","b":"counter/sharp","n":6000,"winPct":24.38,"margin":-13.19,"avgScore":112.2,"otPct":1.42,"tiebreakPct":0,"firstDrafterWinPct":51.38,"chemA":1.77,"chemB":9.79}
+{"exp":"tournament","a":"stoppers/sharp","b":"hints/sharp","n":6000,"winPct":33.85,"margin":-7.43,"avgScore":102.5,"otPct":2.25,"tiebreakPct":0,"firstDrafterWinPct":48.98,"chemA":0.45,"chemB":8.37}
+{"exp":"tournament","a":"hints/sharp","b":"counter/sharp","n":6000,"winPct":34.42,"margin":-6.97,"avgScore":109.3,"otPct":2.08,"tiebreakPct":0,"firstDrafterWinPct":50.33,"chemA":7.83,"chemB":9.93}

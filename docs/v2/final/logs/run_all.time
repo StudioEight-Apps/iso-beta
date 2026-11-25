@@ -1,0 +1,1 @@
+sh run_all.sh 20000 6000 4000  5715.23s user 73.83s system 344% cpu 27:59.53 total

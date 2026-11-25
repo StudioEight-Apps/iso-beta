@@ -1,0 +1,16 @@
+margin per 100 possessions under best play (row vs column)
+           allShoot   allRim    mixed     flat  oneStar      noD     allD
+allShoot        0.0      5.7     -4.6      0.9     -1.2      2.8      2.9
+allRim         -5.7      0.0     -9.7     -4.3     -7.0     -4.2     -1.1
+mixed           4.6      9.7      0.0      5.5      2.9      5.5      8.3
+flat           -0.9      4.3     -5.5      0.0     -2.6      0.0      2.8
+oneStar         1.2      7.0     -2.9      2.6      0.0      2.8      5.6
+noD            -2.8      4.2     -5.5      0.0     -2.8      0.0      3.1
+allD           -2.9      1.1     -8.3     -2.8     -5.6     -3.1      0.0
+allShoot off blind(plain D) 123.5 value 104.7 mix 0.00 1.00 0.00 0.00 0.00 0.00 0.00 0.00
+allRim off blind(plain D) 113.6 value 100.9 mix 0.00 0.94 0.06 0.00 0.00 0.00 0.00 0.00
+mixed off blind(plain D) 112.9 value 109.0 mix 0.00 0.36 0.64 0.00 0.00 0.00 0.00 0.00
+flat off blind(plain D) 107.4 value 103.5 mix 0.00 0.36 0.64 0.00 0.00 0.00 0.00 0.00
+oneStar off blind(plain D) 116.1 value 107.6 mix 0.00 0.53 0.47 0.00 0.00 0.00 0.00 0.00
+noD off blind(plain D) 121.5 value 116.8 mix 0.00 0.36 0.63 0.00 0.00 0.00 0.00 0.00
+allD off blind(plain D) 91.6 value 88.6 mix 0.00 0.36 0.64 0.00 0.00 0.00 0.00 0.00

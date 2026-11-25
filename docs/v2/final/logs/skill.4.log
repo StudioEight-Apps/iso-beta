@@ -1,0 +1,3 @@
+{"exp":"skill","label":"1b roster only: built roster vs best-ratings roster (both sharp coaches)","a":"builder/sharp","b":"ratings/sharp","n":20000,"winPct":75.8,"margin":12.78,"avgScore":110.2,"otPct":1.57,"tiebreakPct":0.005,"firstDrafterWinPct":50.16,"chemA":10.53,"chemB":-1.21}
+{"exp":"skill","label":"two equal skilled players (sanity)","a":"builder/sharp","b":"builder/sharp","n":20000,"winPct":49.95,"margin":-0.1,"avgScore":109.3,"otPct":2.12,"tiebreakPct":0,"firstDrafterWinPct":51.67,"chemA":9.9,"chemB":9.89}
+{"exp":"skill","label":"gradient: skilled GM vs hint-reader (both sharp coaches)","a":"builder/sharp","b":"hints/sharp","n":20000,"winPct":64.6,"margin":6.49,"avgScore":109.1,"otPct":1.98,"tiebreakPct":0,"firstDrafterWinPct":50.83,"chemA":10.02,"chemB":7.86}

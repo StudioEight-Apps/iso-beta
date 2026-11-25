@@ -1,0 +1,1 @@
+node calibrate2.ts 8000 4 9 > cal2.log 2>&1  470.35s user 7.31s system 662% cpu 1:12.13 total
